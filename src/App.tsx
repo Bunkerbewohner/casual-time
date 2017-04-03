@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-import './App.css';
+import { Component } from 'react';
+import * as React from 'react';
+import './styles/App.css';
 
-class App extends Component {
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import Home from "./Home";
+import Timefinder from "./timefinder";
+
+export default class App extends Component<any, any> {
   render() {
-    return (
+    return <Router>
       <div className="App">
-        <div className="App-header">
-          <h2>Welcome to React!</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Route exact path="/" component={Home}/>
+        <Route path="/:id" component={Timefinder}/>
       </div>
-    );
+    </Router>;
   }
 }
-
-export default App;

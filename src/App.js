@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import './App.css';
-class App extends Component {
+import { Component } from 'react';
+import * as React from 'react';
+import './styles/App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Home from "./Home";
+import Timefinder from "./timefinder";
+export default class App extends Component {
     render() {
-        return (React.createElement("div", { className: "App" },
-            React.createElement("div", { className: "App-header" },
-                React.createElement("h2", null, "Welcome to React!")),
-            React.createElement("p", { className: "App-intro" },
-                "To get started, edit ",
-                React.createElement("code", null, "src/App.js"),
-                " and save to reload.")));
+        return React.createElement(Router, null,
+            React.createElement("div", { className: "App" },
+                React.createElement(Route, { exact: true, path: "/", component: Home }),
+                React.createElement(Route, { path: "/:id", component: Timefinder })));
     }
 }
-export default App;

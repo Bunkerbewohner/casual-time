@@ -1,9 +1,13 @@
 {
-    "compilerOptions": {
-        "module": "es6",
-        "target": "es2016",
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "jsx": "react"
-    }
+  "compilerOptions": {
+    "module": "es6",
+    "moduleResolution": "node",
+    "lib": [
+      "dom", "es6"
+    ],
+    "target": "es2016",
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "jsx": "react"
+  }
 }

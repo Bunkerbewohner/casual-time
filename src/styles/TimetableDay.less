@@ -1,0 +1,22 @@
+.TimetableDay {
+  display: block;
+
+  & > main {
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  .HourSlot {
+    display: flex;
+    border-right: 1px dashed #ddd;
+    text-align: left;
+
+    & > header {
+      padding: 0px 8px;
+      margin-right: 15px;
+      border-right: 1px solid black;
+      font-size: 0.8em;
+      font-family: monospace, sans-serif;
+    }
+  }
+}
