@@ -6,15 +6,15 @@
   &:before {
     content: " ";
     position: fixed;
+    top: 0;
     width: 100%;
-    height: 36px;
-    background-color: rgba(255, 255, 255, 0.9);
+    height: 34px;
+    background-color: white;
     left: 0;
   }
 
   & > div {
-    flex: 1;
-    max-width: 200px;
+    flex: 0 0 200px;
   }
 
   .day {
@@ -23,22 +23,74 @@
     border-bottom: 1px solid #82bbff;
   }
 
+  .TimetableColumn.active .day {
+    //border-left: 1px solid #888;
+  }
+
   .hour {
     padding: 2px 8px;
+    box-sizing: border-box;
+    height: 22px;
 
     &:nth-child(2n) {
       background-color: #fafafa;
+    }
+
+    .Toggle {
+      margin: -1px -7px;
+      height: 20px;
+    }
+  }
+
+  .TimetableColumn.active .hour {
+    border-left: 1px solid #888;
+    background-color: #fbfbfb;
+
+    &:nth-child(2n) {
+      background-color: #f8f8f8;
     }
   }
 
   header {
     padding: 8px 8px;
+    width: 200px;
+    box-sizing: border-box;
     font-weight: 500;
     position: fixed;
-    background-color: rgba(255, 255, 255, 0.9);
+    top: 0;
+    background-color: white;
   }
 
-  main {
-    margin-top: 38px;
+  .TimetableColumn.active header {
+    border-left: 1px solid #888;
+    background-color: #fbfbfb;
+  }
+
+  .RowHeaders {
+    & > main {
+      margin-top: 34px;
+    }
+  }
+}
+
+.TimetableColumn:hover, .TimetableColumn.active:hover {
+  background-color: white;
+
+  .hour {
+    background-color: #efefef;
+
+    &:nth-child(2n) {
+      background-color: #e0e0e0;
+    }
+  }
+
+  header {
+    background-color: #d0d0d0;
+  }
+}
+
+.TimetableColumn {
+  .backdrop {
+    height: 34px;
   }
 }

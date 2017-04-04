@@ -1,12 +1,85 @@
 .Toggle {
   display: block;
 
-  &:hover, &.true {
+  &:hover {
+    background-color: rgb(216, 237, 202);
+    cursor: pointer;
+
+    .tooltip span {
+      background-color: rgb(216, 237, 202);
+    }
+
+    &.true .tooltip span {
+      background-color: #a0d381;
+    }
+  }
+
+  &.true {
     background-color: #a0d381;
     cursor: pointer;
+
+    .tooltip span {
+      background-color: #a0d381;
+    }
   }
 
   &:active {
     background-color: #5abc52;
+
+    &.true {
+      background-color: #ff9749;
+
+      .tooltip {
+        display: none;
+      }
+    }
+
+    &.false {
+      .tooltip span {
+        background-color: #5abc52;
+      }
+    }
+  }
+
+  input {
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    padding: 2px 4px;
+    font-size: 0.75em;
+    display: block;
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .content {
+    font-size: 0.75em;
+    padding: 2px 4px;
+    box-sizing: border-box;
+  }
+
+  .tooltip {
+    position: absolute;
+    width: 200px;
+    font-size: 0.9em;
+    box-sizing: border-box;
+    padding: 2px 4px;
+    text-align: right;
+    display: block;
+    pointer-events: none;
+    font-weight: 500;
+
+    span {
+      background-color: #5abc52;
+      padding: 2px;
+      color: #63775b;
+    }
   }
 }

@@ -3,16 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/classnames": "^0.0.32",
     "@types/history": "^4.5.0",
     "@types/react": "^15.0.20",
     "@types/react-dom": "^0.14.23",
     "@types/react-router-dom": "^4.0.1",
+    "classnames": "^2.2.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.0.0"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "typescript": "^2.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

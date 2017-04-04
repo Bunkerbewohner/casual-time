@@ -3,6 +3,7 @@ import {RouteComponentProps} from "react-router";
 import Timetable from "./Timetable";
 import {Plan} from "../model/Plan";
 import {addDays, formatDateTime} from "../model/DateTime";
+import {User} from "../model/User";
 
 const plan: Plan = {
     users: [
@@ -16,13 +17,21 @@ const plan: Plan = {
     ]
 }
 
+const user: User = {
+    email: "mathias.kahl@gmail.com",
+    name: "Mathias",
+    authTokens: [
+        { token: "A" }
+    ]
+}
+
 const Timefinder = (props: RouteComponentProps<any>) =>
     <div>
         <header title={props.match.params.id}>
         </header>
 
         <main>
-            <Timetable plan={plan}/>
+            <Timetable plan={plan} user={user}/>
         </main>
     </div>
 

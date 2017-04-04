@@ -21,7 +21,7 @@ export function getDateAndHour(datetime: DateTimeString): DateTimeString {
 }
 
 export function getHour(datetime: DateTimeString): number {
-    return parseInt(datetime.substr(11, 2))
+    return parseInt(datetime.substr(11, 2), 10)
 }
 
 export function twoDigits(num: number): string {

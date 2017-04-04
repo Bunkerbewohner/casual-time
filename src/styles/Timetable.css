@@ -6,14 +6,14 @@
 .Timetable:before {
   content: " ";
   position: fixed;
+  top: 0;
   width: 100%;
-  height: 36px;
-  background-color: rgba(255, 255, 255, 0.9);
+  height: 34px;
+  background-color: white;
   left: 0;
 }
 .Timetable > div {
-  flex: 1;
-  max-width: 200px;
+  flex: 0 0 200px;
 }
 .Timetable .day {
   padding: 4px 8px;
@@ -22,16 +22,55 @@
 }
 .Timetable .hour {
   padding: 2px 8px;
+  box-sizing: border-box;
+  height: 22px;
 }
 .Timetable .hour:nth-child(2n) {
   background-color: #fafafa;
 }
+.Timetable .hour .Toggle {
+  margin: -1px -7px;
+  height: 20px;
+}
+.Timetable .TimetableColumn.active .hour {
+  border-left: 1px solid #888;
+  background-color: #fbfbfb;
+}
+.Timetable .TimetableColumn.active .hour:nth-child(2n) {
+  background-color: #f8f8f8;
+}
 .Timetable header {
   padding: 8px 8px;
+  width: 200px;
+  box-sizing: border-box;
   font-weight: 500;
   position: fixed;
-  background-color: rgba(255, 255, 255, 0.9);
+  top: 0;
+  background-color: white;
 }
-.Timetable main {
-  margin-top: 38px;
+.Timetable .TimetableColumn.active header {
+  border-left: 1px solid #888;
+  background-color: #fbfbfb;
+}
+.Timetable .RowHeaders > main {
+  margin-top: 34px;
+}
+.TimetableColumn:hover,
+.TimetableColumn.active:hover {
+  background-color: white;
+}
+.TimetableColumn:hover .hour,
+.TimetableColumn.active:hover .hour {
+  background-color: #efefef;
+}
+.TimetableColumn:hover .hour:nth-child(2n),
+.TimetableColumn.active:hover .hour:nth-child(2n) {
+  background-color: #e0e0e0;
+}
+.TimetableColumn:hover header,
+.TimetableColumn.active:hover header {
+  background-color: #d0d0d0;
+}
+.TimetableColumn .backdrop {
+  height: 34px;
 }
