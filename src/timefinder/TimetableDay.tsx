@@ -35,7 +35,7 @@ class HourSlot extends React.Component<HourSlotProps, any> {
         const {date, hour, plan} = this.props
         const className = "HourSlot h" + hour
         const columns = plan.users.map(user => {
-            const claims = plan.claims.filter(c => getDateYmd(c.start) === date && hour === getHour(c.start) && c.userEmail === user.email)
+            const claims = plan.claims.filter(c => getDateYmd(c.time) === date && hour === getHour(c.time) && c.userEmail === user.email)
             return {user, claim: claims.length > 0 ? claims[0] : undefined}
         })
 

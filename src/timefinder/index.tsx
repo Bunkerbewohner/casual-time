@@ -2,7 +2,7 @@ import * as React from 'react'
 import {RouteComponentProps} from "react-router";
 import Timetable from "./Timetable";
 import {Plan} from "../model/Plan";
-import {addDays, formatDateTime} from "../model/DateTime";
+import {addDays, formatDateTime, addHours, now} from "../model/DateTime";
 import {User} from "../model/User";
 
 const plan: Plan = {
@@ -13,7 +13,7 @@ const plan: Plan = {
         {email: "clemens.kanzler@gmail.com", name: "Clemens", authTokens: [{token: "D"}]}
     ],
     claims: [
-        { start: formatDateTime(new Date()), end: formatDateTime(addDays(new Date(), 2)), userEmail: "mathias.kahl@gmail.com" }
+        { time: formatDateTime(addHours(now(), 1)), userEmail: "mathias.kahl@gmail.com", comment: "Deal with it" }
     ]
 }
 

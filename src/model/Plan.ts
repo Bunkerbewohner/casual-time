@@ -3,8 +3,8 @@ import {DateTimeString, DateString, getDateYmd} from "./DateTime";
 
 export interface Claim {
     userEmail: string;
-    start: DateTimeString;
-    end: DateTimeString;
+    time: DateTimeString;
+    comment?: string;
 }
 
 export interface Plan {

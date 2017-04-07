@@ -4,6 +4,7 @@ import "../styles/Toggle.css"
 interface ToggleProps {
     value: boolean;
     tooltip?: string;
+    comment?: string;
 }
 
 interface ToggleState {
@@ -19,6 +20,7 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
 
         this.state = {
             value: props.value,
+            content: props.comment,
             editing: false
         }
     }

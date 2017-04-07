@@ -18,6 +18,9 @@
 .Timetable .day {
   padding: 4px 8px;
   background-color: #ebf8ff;
+  background-color: #fff;
+  font-weight: 500;
+  padding-top: 16px;
   border-bottom: 1px solid #82bbff;
 }
 .Timetable .hour {

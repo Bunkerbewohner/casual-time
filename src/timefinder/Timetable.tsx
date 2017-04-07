@@ -2,7 +2,7 @@ import * as React from "react";
 import Plan, {Claim} from "../model/Plan";
 import {
     addDays, DateString, dateToHumanReadable, formatDate, getHours, groupByDay, now,
-    twoDigits
+    twoDigits, getDateAndHour, getDateYmd, getHour
 } from "../model/DateTime";
 import {range} from "../misc/collections";
 import TimetableDay from "./TimetableDay";
@@ -23,10 +23,20 @@ const TimetableRowHead = ({plan, day}: {plan: Plan, day: DateString}) => <div>
     {getHours(day).map(hour => <div className="hour" key={hour}>{twoDigits(hour)}:00</div>)}
 </div>
 
+const TimetableCell = ({day, hour, user, plan}: {day: DateString, hour: number, user: User, plan: Plan}) => {
+    const claim = plan.claims.filter(c => getDateYmd(c.time) === day && getHour(c.time) === hour && c.userEmail === user.email)[0]
+    const value = claim ? true : false
+    const comment = claim ? claim.comment : null
+
+    return <div className="hour">
+        <Toggle value={value} comment={comment} tooltip={twoDigits(hour)+":00"}/>
+    </div>
+}
+
 const TimetableRow = ({plan, user, day}: {plan: Plan, user: User, day: DateString}) => <div>
     <div className="day">&nbsp;</div>
 
-    {getHours(day).map(hour => <div className="hour" key={hour}><Toggle value={false} tooltip={twoDigits(hour)+":00"}/></div>)}
+    {getHours(day).map(hour => <TimetableCell day={day} hour={hour} user={user} plan={plan} key={hour}/>)}
 </div>
 
 const TimetableColumn = ({plan, user, activeUser}: {plan: Plan, user: User, activeUser: User}) => {
