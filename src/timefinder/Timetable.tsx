@@ -2,34 +2,46 @@ import * as React from "react";
 import Plan, {Claim} from "../model/Plan";
 import {
     addDays, DateString, dateToHumanReadable, formatDate, getHours, groupByDay, now,
-    twoDigits, getDateAndHour, getDateYmd, getHour
+    twoDigits, getDateAndHour, getDateYmd, getHour, TimeString
 } from "../model/DateTime";
-import {range} from "../misc/collections";
-import TimetableDay from "./TimetableDay";
+import {range, any} from "../misc/collections";
 import "../styles/Timetable.css"
 import {User} from "../model/User";
 import Avatar from "../components/Avatar";
 import Toggle from "../components/Toggle";
 import classNames from "classnames"
+import {equalsX} from "../misc/fun";
 
 interface TimetableProps {
     plan: Plan;
     user: User;
 }
 
+const TimetableRowHeadCell = ({plan, hour}: {plan: Plan, hour: number}) => {
+    const timestring = twoDigits(hour) + ":00"
+    const className = classNames("hour", {
+        guideline: any(plan.guidelines, equalsX(timestring))
+    })
+    return <div className={className} key={hour}>{twoDigits(hour)}:00</div>
+}
+
 const TimetableRowHead = ({plan, day}: {plan: Plan, day: DateString}) => <div>
     <div className="day">{dateToHumanReadable(day)}</div>
 
-    {getHours(day).map(hour => <div className="hour" key={hour}>{twoDigits(hour)}:00</div>)}
+    {getHours(day).map(hour => <TimetableRowHeadCell plan={plan} hour={hour}/>)}
 </div>
 
 const TimetableCell = ({day, hour, user, plan}: {day: DateString, hour: number, user: User, plan: Plan}) => {
+    const timestring = twoDigits(hour) + ":00"
     const claim = plan.claims.filter(c => getDateYmd(c.time) === day && getHour(c.time) === hour && c.userEmail === user.email)[0]
     const value = claim ? true : false
     const comment = claim ? claim.comment : null
+    const className = classNames("hour", {
+        guideline: any(plan.guidelines, equalsX(timestring))
+    })
 
-    return <div className="hour">
-        <Toggle value={value} comment={comment} tooltip={twoDigits(hour)+":00"}/>
+    return <div className={className}>
+        <Toggle value={value} comment={comment} tooltip={timestring}/>
     </div>
 }
 

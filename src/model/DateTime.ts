@@ -1,8 +1,9 @@
+import {range} from "../misc/collections";
+
 /**
- * ISO 8601 Date Time
+ * Full ISO 8601 Date Time including timezone.
  * e.g. 2017-12-29T12:30:00+00:00 (UTC)
  */
-import {range} from "../misc/collections";
 export type DateTimeString = string;
 
 /**
@@ -11,6 +12,11 @@ export type DateTimeString = string;
  */
 export type DateString = string;
 
+/**
+ * String denoting a time in the form HH:mm (HH = hours, mm = minutes), e.g. 12:00 or 22:30.
+ * The seconds are implicitly assumed to be 00 and must not be part of the actual string.
+ */
+export type TimeString = string;
 
 export function getDateYmd(datetime: DateTimeString): DateString {
     return datetime.substr(0, 10)

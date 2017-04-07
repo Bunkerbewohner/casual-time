@@ -3,6 +3,7 @@
 # generated code
 src/**/*.css
 src/**/*.js
+src/**/*.jsx
 
 # dependencies
 /node_modules

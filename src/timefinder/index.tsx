@@ -14,6 +14,9 @@ const plan: Plan = {
     ],
     claims: [
         { time: formatDateTime(addHours(now(), 1)), userEmail: "mathias.kahl@gmail.com", comment: "Deal with it" }
+    ],
+    guidelines: [
+        "18:00"
     ]
 }
 
