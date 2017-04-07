@@ -58,22 +58,23 @@
 .Timetable .RowHeaders > main {
   margin-top: 34px;
 }
-.TimetableColumn:hover,
-.TimetableColumn.active:hover {
+/*
+.TimetableColumn:hover, .TimetableColumn.active:hover {
   background-color: white;
+
+  .hour {
+    background-color: #efefef;
+
+    &:nth-child(2n) {
+      background-color: #e0e0e0;
+    }
+  }
+
+  header {
+    background-color: #d0d0d0;
+  }
 }
-.TimetableColumn:hover .hour,
-.TimetableColumn.active:hover .hour {
-  background-color: #efefef;
-}
-.TimetableColumn:hover .hour:nth-child(2n),
-.TimetableColumn.active:hover .hour:nth-child(2n) {
-  background-color: #e0e0e0;
-}
-.TimetableColumn:hover header,
-.TimetableColumn.active:hover header {
-  background-color: #d0d0d0;
-}
+*/
 .TimetableColumn .backdrop {
   height: 34px;
 }
