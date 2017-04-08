@@ -34,6 +34,15 @@ export function getHour(datetime: DateTimeString): number {
     return parseInt(datetime.substr(11, 2), 10)
 }
 
+/**
+ * Gets the timezone offset string, e.g. +02:00 (UTC+2) or -06:00 (UTC-6).
+ * @param datetime
+ * @returns {string}
+ */
+export function getTimezoneOffsetString(datetime: DateTimeString): string {
+    return datetime.substr(19)
+}
+
 export function twoDigits(num: number): string {
     if (num < 10) return "0" + num
     else return num + ""
@@ -148,4 +157,10 @@ export function getHours(date: DateString): number[] {
     const hours = isToday ? range(now().getHours(), 24) : range(0, 24)
 
     return hours
+}
+
+export const TIMEZONE_OFFSET_STRING = getTimezoneOffsetString(formatDateTime(now()))
+
+export function makeDateTimeString(date: DateString, time: TimeString): DateTimeString {
+    return date + "T" + time + ":00" + TIMEZONE_OFFSET_STRING
 }

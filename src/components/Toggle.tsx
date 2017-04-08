@@ -5,6 +5,7 @@ interface ToggleProps {
     value: boolean;
     tooltip?: string;
     comment?: string;
+    save?: (value: boolean, comment?: string) => void;
 }
 
 interface ToggleState {
@@ -59,8 +60,13 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
         const input = this.refs["text"] as HTMLInputElement
         input.blur()
 
-        const value = input.value
-        this.setState({value: this.state.value, editing: false, content: value})
+        const value = this.state.value
+        const comment = input.value
+        this.setState({value: value, editing: false, content: comment})
+
+        if (this.props.save) {
+            this.props.save(value, comment)
+        }
     }
 
     componentDidUpdate(prevProps: ToggleProps, prevState: ToggleState) {
@@ -91,10 +97,17 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
     }
 
     onClick = (e: React.MouseEvent<HTMLSpanElement>) => {
+        const value = !this.state.value
+        const comment = this.state.value ? null : this.state.content
+
         this.setState({
-            value: !this.state.value,
-            editing: !this.state.value,
-            content: this.state.value ? null : this.state.content
+            value: value,
+            editing: value,
+            content: comment
         })
+
+        if (this.props.save) {
+            this.props.save(value, comment)
+        }
     }
 }
