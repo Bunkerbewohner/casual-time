@@ -81,3 +81,21 @@
 .guideline {
   border-top: 1px dotted #82bbff;
 }
+.TimetableRowHeadCell {
+  display: flex;
+  flex-direction: row;
+}
+.TimetableRowHeadCell time {
+  flex: 1;
+}
+.TimetableRowHeadCell label {
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+}
+.TimetableRowHeadCell .ProgressBar {
+  flex: 2;
+}
+.TimetableRowHeadCell .hidden {
+  visibility: hidden;
+}

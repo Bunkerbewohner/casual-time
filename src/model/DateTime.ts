@@ -22,6 +22,10 @@ export function getDateYmd(datetime: DateTimeString): DateString {
     return datetime.substr(0, 10)
 }
 
+export function getTimeString(datetime: DateTimeString): TimeString {
+    return datetime.substr(11, 2) + ":00"
+}
+
 export function getDateAndHour(datetime: DateTimeString): DateTimeString {
     return datetime.substr(0, 13)
 }

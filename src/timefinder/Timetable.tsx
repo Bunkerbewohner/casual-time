@@ -2,7 +2,7 @@ import * as React from "react";
 import Plan, {Claim} from "../model/Plan";
 import {
     addDays, DateString, dateToHumanReadable, formatDate, getHours, groupByDay, now,
-    twoDigits, getDateAndHour, getDateYmd, getHour, TimeString
+    twoDigits, getDateAndHour, getDateYmd, getHour, TimeString, getTimeString
 } from "../model/DateTime";
 import {range, any} from "../misc/collections";
 import "../styles/Timetable.css"
@@ -11,24 +11,34 @@ import Avatar from "../components/Avatar";
 import Toggle from "../components/Toggle";
 import classNames from "classnames"
 import {equalsX} from "../misc/fun";
+import ProgressBar from "../components/ProgressBar";
 
 interface TimetableProps {
     plan: Plan;
     user: User;
 }
 
-const TimetableRowHeadCell = ({plan, hour}: {plan: Plan, hour: number}) => {
+const TimetableRowHeadCell = ({plan, day, hour}: {plan: Plan, day: DateString, hour: number}) => {
     const timestring = twoDigits(hour) + ":00"
-    const className = classNames("hour", {
+    const claims = plan.claims.filter(c => getDateYmd(c.time) === day && getTimeString(c.time) === timestring)
+    const claimsCount = claims.length
+    const claimsProgress = claimsCount / (plan.targetCount || plan.users.length)
+    const className = classNames("TimetableRowHeadCell", "hour", {
         guideline: any(plan.guidelines, equalsX(timestring))
     })
-    return <div className={className} key={hour}>{twoDigits(hour)}:00</div>
+    const progressClassName = classNames({hidden: claimsCount === 0})
+
+    return <div className={className} key={hour}>
+        <time>{timestring}</time>
+        <label className={progressClassName}>{claimsCount}</label>
+        <ProgressBar className={progressClassName} progress={claimsProgress}/>
+    </div>
 }
 
 const TimetableRowHead = ({plan, day}: {plan: Plan, day: DateString}) => <div>
     <div className="day">{dateToHumanReadable(day)}</div>
 
-    {getHours(day).map(hour => <TimetableRowHeadCell plan={plan} hour={hour}/>)}
+    {getHours(day).map(hour => <TimetableRowHeadCell key={day+hour} plan={plan} day={day} hour={hour}/>)}
 </div>
 
 const TimetableCell = ({day, hour, user, plan}: {day: DateString, hour: number, user: User, plan: Plan}) => {

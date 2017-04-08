@@ -30,6 +30,11 @@ export interface Plan {
      *  Optional list of day times at which guidelines will be displayed.
      */
     guidelines?: TimeString[];
+
+    /**
+     * Target for number of claims within an hour slot
+     */
+    targetCount?: number;
 }
 
 export default Plan
