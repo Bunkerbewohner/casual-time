@@ -4,6 +4,7 @@ import {DateTimeString, DateString, getDateYmd, TimeString} from "./DateTime";
 export interface Claim {
     userEmail: string;
     time: DateTimeString;
+    committed?: boolean;
     comment?: string;
 }
 

@@ -7,7 +7,7 @@ interface ToggleProps {
     tooltip?: string;
     comment?: string;
     committed?: boolean;
-    save?: (value: boolean, comment?: string) => void;
+    save?: (value: boolean, committed?: boolean, comment?: string) => void;
 }
 
 interface ToggleState {
@@ -73,7 +73,7 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
         this.setState({value: value, editing: false, content: comment})
 
         if (this.props.save) {
-            this.props.save(value, comment)
+            this.props.save(value, this.state.committed, comment)
         }
     }
 
@@ -113,7 +113,7 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
             })
 
             if (this.props.save) {
-                this.props.save(true, this.state.content)
+                this.props.save(true, false, this.state.content)
             }
         } else if (this.state.value && !this.state.committed) {
             // commit to this time
@@ -122,7 +122,7 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
             })
 
             if (this.props.save) {
-                this.props.save(true, this.state.content)
+                this.props.save(true, true, this.state.content)
             }
         } else {
             // revert back to ontoggled state
@@ -133,7 +133,7 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
             })
 
             if (this.props.save) {
-                this.props.save(false, null)
+                this.props.save(false, false, null)
             }
         }
 

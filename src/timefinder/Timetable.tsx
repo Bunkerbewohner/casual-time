@@ -24,16 +24,19 @@ const TimetableRowHeadCell = ({plan, day, hour}: {plan: Plan, day: DateString, h
     const timestring = twoDigits(hour) + ":00"
     const claims = plan.claims.filter(c => getDateYmd(c.time) === day && getTimeString(c.time) === timestring)
     const claimsCount = claims.length
+    const committedClaimsCount = claims.filter(c => c.committed).length
     const claimsProgress = claimsCount / (plan.targetCount || plan.users.length)
+    const claimsProgress2 = committedClaimsCount / (plan.targetCount || plan.users.length)
     const className = classNames("TimetableRowHeadCell", "hour", {
         guideline: any(plan.guidelines, equalsX(timestring))
     })
     const progressClassName = classNames({hidden: claimsCount === 0})
+    const labelClassName = classNames({hidden: committedClaimsCount === 0})
 
     return <div className={className} key={hour}>
         <time>{timestring}</time>
-        <label className={progressClassName}>{claimsCount}</label>
-        <ProgressBar className={progressClassName} progress={claimsProgress}/>
+        <label className={labelClassName}>{committedClaimsCount}</label>
+        <ProgressBar className={progressClassName} progress={claimsProgress} progress2={claimsProgress2}/>
     </div>
 }
 
@@ -52,11 +55,12 @@ const TimetableCell = ({day, hour, user, plan, addClaim, removeClaim}: {day: Dat
         guideline: any(plan.guidelines, equalsX(timestring))
     })
 
-    const save = (value: boolean, comment?: string) => {
+    const save = (value: boolean, committed?: boolean, comment?: string) => {
         if (value) {
             addClaim({
                 userEmail: user.email,
                 time: makeDateTimeString(day, timestring),
+                committed: committed,
                 comment: comment
             })
         } else {
