@@ -1,25 +1,29 @@
+@available: #d7e8ca;
+@committed: #a0d381;
+@hover: #ecf4ea;
+
 .Toggle {
   display: block;
 
   &:hover {
-    background-color: rgb(216, 237, 202);
+    background-color: @hover;
     cursor: pointer;
 
     .tooltip span {
-      background-color: rgb(216, 237, 202);
+      background-color: @hover;
     }
 
     &.true .tooltip span {
-      background-color: #a0d381;
+      background-color: @available;
     }
   }
 
   &.true {
-    background-color: #a0d381;
+    background-color: @available;
     cursor: pointer;
 
     .tooltip span {
-      background-color: #a0d381;
+      background-color: @available;
     }
   }
 
@@ -75,6 +79,7 @@
     display: block;
     pointer-events: none;
     font-weight: 500;
+    margin-top: -2px;
 
     span {
       background-color: #5abc52;
