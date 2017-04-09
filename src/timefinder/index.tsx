@@ -7,10 +7,10 @@ import {getIn, updateIn, add, propsNotEqualX, setIn} from "../misc/fun";
 
 const plan: Plan = {
     users: [
-        {email: "mathias.kahl@gmail.com", name: "Atze", authTokens: [{token: "A"}]},
-        {email: "machisuji@gmail.com", name: "Markus", authTokens: [{token: "B"}]},
-        {email: "yikino@gmail.com", name: "Tobi", authTokens: [{token: "C"}]},
-        {email: "clemens.kanzler@gmail.com", name: "Clemens", authTokens: [{token: "D"}]}
+        {email: "mathias.kahl@gmail.com", name: "Atze"},
+        {email: "machisuji@gmail.com", name: "Markus"},
+        {email: "yikino@gmail.com", name: "Tobi"},
+        {email: "clemens.kanzler@gmail.com", name: "Clemens"}
     ],
     claims: [],
     guidelines: [
@@ -20,10 +20,7 @@ const plan: Plan = {
 
 const user: User = {
     email: "mathias.kahl@gmail.com",
-    name: "Mathias",
-    authTokens: [
-        {token: "A"}
-    ]
+    name: "Mathias"
 }
 
 function addClaim(claim: Claim) {
