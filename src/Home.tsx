@@ -3,7 +3,7 @@ import './styles/Home.css'
 import {RouteComponentProps} from "react-router";
 
 const CreateButton = ({history}) =>
-    <button onClick={() => history.push('/test')}>CREATE</button>
+    <button onClick={() => history.push('/time/test')}>CREATE</button>
 
 const Home = (props: RouteComponentProps<any>) =>
     <div className="Home">

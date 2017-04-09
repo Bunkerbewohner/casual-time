@@ -2,7 +2,6 @@ import * as React from 'react'
 import {RouteComponentProps} from "react-router";
 import Timetable from "./Timetable";
 import {Plan, Claim} from "../model/Plan";
-import {addDays, formatDateTime, addHours, now} from "../model/DateTime";
 import {User} from "../model/User";
 import {getIn, updateIn, add, propsNotEqualX, setIn} from "../misc/fun";
 
@@ -68,7 +67,6 @@ class Timefinder extends React.Component<RouteComponentProps<any>, TimefinderSta
 
     addClaim = (claim: Claim) => {
         this.setState({plan: addClaim(claim)(this.state.plan)})
-        console.log(this.state.plan)
     }
 
     removeClaim = (claim: Claim) => {

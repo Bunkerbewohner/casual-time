@@ -11,7 +11,7 @@ export default class App extends Component<any, any> {
     return <Router>
       <div className="App">
         <Route exact path="/" component={Home}/>
-        <Route path="/:id" component={Timefinder}/>
+        <Route path="/time/:id" component={Timefinder}/>
       </div>
     </Router>;
   }
