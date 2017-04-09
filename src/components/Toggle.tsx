@@ -1,16 +1,19 @@
 import * as React from "react"
+import classNames from "classnames"
 import "../styles/Toggle.css"
 
 interface ToggleProps {
     value: boolean;
     tooltip?: string;
     comment?: string;
+    committed?: boolean;
     save?: (value: boolean, comment?: string) => void;
 }
 
 interface ToggleState {
     value: boolean;
     editing: boolean;
+    committed: boolean;
     content?: string;
     tooltip?: string;
 }
@@ -22,12 +25,17 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
         this.state = {
             value: props.value,
             content: props.comment,
+            committed: props.committed,
             editing: false
         }
     }
 
     render() {
-        const className = "Toggle" + (this.state.value ? ' true' : ' false')
+        const className = classNames("Toggle", {
+            "true": this.state.value,
+            "false": !this.state.value,
+            committed: this.state.committed
+        })
 
         return <span className={className} onClick={this.onClick} onMouseOver={this.onMouseOver}
                      onMouseOut={this.onMouseOut}>
@@ -97,17 +105,37 @@ export default class Toggle extends React.Component<ToggleProps, ToggleState> {
     }
 
     onClick = (e: React.MouseEvent<HTMLSpanElement>) => {
-        const value = !this.state.value
-        const comment = this.state.value ? null : this.state.content
+        if (!this.state.value) {
+            // indicate availability
+            this.setState({
+                value: true,
+                editing: true
+            })
 
-        this.setState({
-            value: value,
-            editing: value,
-            content: comment
-        })
+            if (this.props.save) {
+                this.props.save(true, this.state.content)
+            }
+        } else if (this.state.value && !this.state.committed) {
+            // commit to this time
+            this.setState({
+                committed: true
+            })
 
-        if (this.props.save) {
-            this.props.save(value, comment)
+            if (this.props.save) {
+                this.props.save(true, this.state.content)
+            }
+        } else {
+            // revert back to ontoggled state
+            this.setState({
+                value: false,
+                committed: false,
+                editing: false
+            })
+
+            if (this.props.save) {
+                this.props.save(false, null)
+            }
         }
+
     }
 }

@@ -4,6 +4,7 @@
 
 .Toggle {
   display: block;
+  position: relative;
 
   &:hover {
     background-color: @hover;
@@ -27,10 +28,18 @@
     }
   }
 
+  &.true.committed {
+    background-color: @committed;
+
+    .tooltip span {
+      background-color: @committed;
+    }
+  }
+
   &:active {
     background-color: #5abc52;
 
-    &.true {
+    &.true.committed {
       background-color: #ff9749;
 
       .tooltip {
@@ -38,10 +47,8 @@
       }
     }
 
-    &.false {
-      .tooltip span {
-        background-color: #5abc52;
-      }
+    .tooltip span {
+      background-color: #5abc52 !important;
     }
   }
 
